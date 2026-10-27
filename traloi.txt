@@ -1,0 +1,7 @@
+Khi Promrtheus được triển khai dưới dạng Docker container, khai báo localhost sẽ trỏ thẳng vào chính môi trường 
+bên trong container của Prometheus, chứ không phải máy chủ Host bên ngoài. Vì không có ứng dụng nào đang chạy ở cổng
+8080 bên trong container đó.
+Prometheus gọi không được và sinh ra lỗi connection refused
+Đối với ứng dụng Spring Boot, Actuator và Micrometer sẽ xuất dữ liệu giám sát ở định dạng chuẩn bị đường dẫn
+/actuator/prometheus thay vì /metrics mặc định. Bắt buộc phải bổ sung chỉ thị metrics_path vào cấu hình, nếu không
+Prometheus sẽ gặp lỗi 404 do gọi sai endpoint.
